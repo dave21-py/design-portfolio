@@ -5,7 +5,6 @@
     --globe-background: #3c3c3c;
     --glow-color: #00c2cb;
     --font-family: "Inter", sans-serif;
-    /* Font stack for a modern, high-quality look */
     --modern-font-stack:
         -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
         sans-serif;
@@ -181,9 +180,23 @@ body {
     font-weight: 500;
 }
 
-/* --- HERO IMAGE (HIDDEN) --- */
+/* --- HERO IMAGE --- */
 .hero-image-container {
-    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    z-index: 5;
+    width: 250vw; /* Changed from 35vw */
+    max-width: 1600px; /* Changed from 500px */
+    opacity: 0;
+    animation: fadeInAndScale 1.5s 1s ease-out forwards;
+}
+.hero-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    pointer-events: none;
 }
 
 /* --- SCROLLING MARQUEE (BOTTOM) --- */
@@ -193,7 +206,7 @@ body {
     left: 0;
     width: 100%;
     overflow: hidden;
-    z-index: 5;
+    z-index: 10;
     opacity: 0;
     animation: fadeIn 1s 0.5s ease-out forwards;
 }
@@ -210,8 +223,8 @@ body {
 
 .marquee h1 {
     font-family: var(--modern-font-stack);
-    font-size: 18vw;
-    font-weight: 600;
+    font-size: 12vw;
+    font-weight: 400;
     line-height: 1.1;
     color: var(--text-color);
     white-space: nowrap;
@@ -295,6 +308,12 @@ body {
         transform: translateX(-50%);
     }
 }
+@keyframes fadeInAndScale {
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
 
 /* --- RESPONSIVENESS --- */
 @media (max-width: 768px) {
@@ -314,5 +333,8 @@ body {
     }
     .marquee h1 {
         font-size: 22vw;
+    }
+    .hero-image-container {
+        width: 60vw;
     }
 }

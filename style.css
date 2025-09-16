@@ -20,14 +20,14 @@ body {
     font-family: var(--font-family);
     background-color: var(--background-color);
     color: var(--text-color);
-    overflow: hidden;
+    overflow: hidden; /* Important: Keeps the page from actually scrolling */
     height: 100vh;
     position: relative;
 }
 
 /* --- HEADER --- */
 .header {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -62,10 +62,10 @@ body {
 
 /* --- LOCATION WIDGET (LEFT) --- */
 .location-widget {
-    position: fixed;
+    position: absolute;
     top: 40%;
     left: 0;
-    transform: translateY(-50%) translateX(-100%) scale(0.5); /* Added scale here */
+    transform: translateY(-50%) translateX(-100%) scale(0.5);
     background-color: var(--widget-background);
     padding: 20px 25px 20px 40px;
     border-top-right-radius: 50px;
@@ -149,7 +149,7 @@ body {
 
 /* --- FUNCTIONAL ROLE LINK (CENTER-RIGHT) --- */
 .role-link {
-    position: fixed;
+    position: absolute;
     top: 50%;
     right: 10vw;
     transform: translateY(-50%) translateX(110%);
@@ -182,13 +182,13 @@ body {
 
 /* --- HERO IMAGE --- */
 .hero-image-container {
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.95);
     z-index: 5;
-    width: 250vw; /* Changed from 35vw */
-    max-width: 1600px; /* Changed from 500px */
+    width: 250vw;
+    max-width: 1600px;
     opacity: 0;
     animation: fadeInAndScale 1.5s 1s ease-out forwards;
 }
@@ -201,7 +201,7 @@ body {
 
 /* --- SCROLLING MARQUEE (BOTTOM) --- */
 .title-container {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -230,6 +230,113 @@ body {
     white-space: nowrap;
     padding: 0 2vw;
 }
+
+/* --- SCROLL ANIMATION STRUCTURE --- */
+.scroll-wrapper {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.hero-section,
+.content-section {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.hero-section.scrolled {
+    transform: translateY(-100%);
+}
+
+.content-section {
+    background-color: #fff;
+    color: #1a1a1a;
+    transform: translateY(100%);
+    padding: 60px;
+}
+
+.content-section.visible {
+    transform: translateY(0);
+}
+
+/* --- START: UPDATED CONTENT SECTION STYLES --- */
+.content-section {
+    align-items: flex-start;
+    padding-top: 15vh;
+}
+
+.content-wrapper {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    height: 100%;
+}
+
+.content-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 60px;
+}
+
+.about-text {
+    flex-basis: 55%;
+}
+
+.about-text h2 {
+    font-size: 44px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #000;
+}
+
+.about-details {
+    flex-basis: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 60px;
+}
+
+.about-paragraph {
+    font-family: var(--modern-font-stack);
+    font-size: 16px;
+    line-height: 1.7;
+    color: #333;
+    padding-top: 6px;
+}
+
+.about-me-button {
+    background-color: #1a1a1a;
+    color: #fff;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-right: 20px;
+}
+
+.recent-work {
+    position: absolute;
+    bottom: 15vh;
+    left: 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: #b0b0b0;
+    letter-spacing: 0.1em;
+}
+/* --- END: UPDATED CONTENT SECTION STYLES --- */
 
 /* --- FLUID NAVIGATION HOVER --- */
 .navigation {
@@ -324,7 +431,7 @@ body {
         display: none;
     }
     .location-widget {
-        transform: translateY(-50%) translateX(-100%) scale(0.2);
+        transform: translateY(-50%) translateX(-100%) scale(0.5);
         top: 25%;
     }
     .role-link {
@@ -336,5 +443,32 @@ body {
     }
     .hero-image-container {
         width: 60vw;
+    }
+
+    /* --- RESPONSIVE STYLES FOR NEW SECTION --- */
+    .content-layout {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .about-text h2 {
+        font-size: 32px;
+    }
+
+    .about-details {
+        align-items: center;
+    }
+
+    .about-me-button {
+        align-self: center;
+        margin-right: 0;
+    }
+
+    .recent-work {
+        width: 100%;
+        text-align: center;
+        left: 0;
     }
 }

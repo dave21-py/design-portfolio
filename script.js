@@ -1,43 +1,44 @@
+// --- SCROLL ANIMATION LOGIC ---
 document.addEventListener("DOMContentLoaded", () => {
-  const navLinks = document.querySelectorAll(".navigation ul li");
-  const navDot = document.querySelector(".nav-dot");
-  const navigation = document.querySelector(".navigation");
-  const pageGlow = document.querySelector(".page-glow");
+  const heroSection = document.querySelector(".hero-section");
+  const contentSection = document.querySelector(".content-section");
 
-  // Check if all required elements exist
-  if (!navLinks.length || !navDot || !navigation || !pageGlow) {
-    console.error("Navigation elements not found for hover effect.");
+  // Ensure sections exist before adding logic
+  if (!heroSection || !contentSection) {
+    console.error("Scroll sections not found.");
     return;
   }
 
-  // Function to move and show the dot
-  const handleMouseEnter = (event) => {
-    const link = event.currentTarget;
+  let isAnimating = false;
+  let currentSection = 0; // 0 for hero, 1 for content
+  const animationDuration = 1500; // 1.5 seconds
 
-    // Calculate the horizontal center of the hovered list item
-    const linkCenter = link.offsetLeft + link.offsetWidth / 2;
+  const handleScroll = (event) => {
+    if (isAnimating) {
+      return;
+    }
 
-    // Move the dot to the calculated position and make it visible
-    navDot.style.left = `${linkCenter}px`;
-    navDot.style.opacity = "1";
-
-    // Show the page glow effect
-    pageGlow.classList.add("visible");
+    // Scrolling down
+    if (event.deltaY > 0 && currentSection === 0) {
+      isAnimating = true;
+      heroSection.classList.add("scrolled");
+      contentSection.classList.add("visible");
+      currentSection = 1;
+      setTimeout(() => {
+        isAnimating = false;
+      }, animationDuration);
+    }
+    // Scrolling up
+    else if (event.deltaY < 0 && currentSection === 1) {
+      isAnimating = true;
+      heroSection.classList.remove("scrolled");
+      contentSection.classList.remove("visible");
+      currentSection = 0;
+      setTimeout(() => {
+        isAnimating = false;
+      }, animationDuration);
+    }
   };
 
-  // Function to hide the dot
-  const handleMouseLeave = () => {
-    navDot.style.opacity = "0";
-
-    // Hide the page glow effect
-    pageGlow.classList.remove("visible");
-  };
-
-  // Add event listeners to each navigation link
-  navLinks.forEach((link) => {
-    link.addEventListener("mouseenter", handleMouseEnter);
-  });
-
-  // Add a single mouseleave event to the whole navigation area
-  navigation.addEventListener("mouseleave", handleMouseLeave);
+  window.addEventListener("wheel", handleScroll);
 });

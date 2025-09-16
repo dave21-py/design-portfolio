@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Dennis Snellenberg | Designer & Developer</title>
+        <title>David Geddam | Designer & Developer</title>
         <link rel="stylesheet" href="style.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,11 +17,11 @@
 
         <header class="header">
             <div class="logo">
-                <p>&copy; Code by Dennis</p>
+                <p>&copy; Code by David</p>
             </div>
             <nav class="navigation">
                 <ul>
-                    <li><a href="#">Work</a></li>
+                    <li><a href="#">Projects</a></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Contact</a></li>
                 </ul>
@@ -33,10 +33,11 @@
             <div class="location-widget">
                 <div class="location-text">
                     <span>Located</span>
-                    <span>in the Netherlands</span>
+                    <span>in the United States</span>
                 </div>
                 <div class="globe-icon-wrapper">
                     <div class="globe-icon">
+                        <!-- START: Replace this entire block in your index.html -->
                         <div class="globe">
                             <div class="globe-line"></div>
                             <div class="globe-line"></div>
@@ -45,44 +46,48 @@
                             <div class="globe-line"></div>
                             <div class="globe-line"></div>
                         </div>
+                        <!-- END: Replacement block -->
                     </div>
                 </div>
             </div>
 
-            <div class="role-description">
-                <div class="arrow-icon">
-                    <svg
-                        width="18"
-                        height="18"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            d="M8.38477 2.27271L13.1121 7.00004L13.1121 8.99998L8.38477 13.7273L7.07107 12.4136L10.4847 8.99998H2.88794V7.00004H10.4847L7.07107 3.58634L8.38477 2.27271Z"
-                            fill="white"
-                        />
-                    </svg>
+            <!-- MODIFIED: Wrapped the entire block in an anchor tag to make it functional -->
+            <a href="#" class="role-link">
+                <div class="role-description">
+                    <div class="arrow-icon">
+                        <!-- Increased SVG size for more impact -->
+                        <svg
+                            width="32"
+                            height="32"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M8.38477 2.27271L13.1121 7.00004L13.1121 8.99998L8.38477 13.7273L7.07107 12.4136L10.4847 8.99998H2.88794V7.00004H10.4847L7.07107 3.58634L8.38477 2.27271Z"
+                                fill="white"
+                            />
+                        </svg>
+                    </div>
+                    <p>Freelance</p>
+                    <p>CS Student and Developer</p>
                 </div>
-                <p>Freelance</p>
-                <p>Designer & Developer</p>
-            </div>
+            </a>
 
             <div class="hero-image-container">
-                <!--
-                Remember to replace this with the path to your image!
-                If you see "Portrait of Dennis Snellenberg", it means the image is not loading.
-                -->
-                <img src="" alt="" class="hero-image" />
+                <img
+                    src=""
+                    alt="Portrait of Dennis Snellenberg"
+                    class="hero-image"
+                />
             </div>
 
-            <!-- MODIFIED: Changed the static name back to a moving marquee -->
             <div class="title-container">
                 <div class="marquee">
                     <div class="marquee-content">
-                        <h1>berg &nbsp;—&nbsp; Dennis&nbsp;</h1>
-                        <!-- The text is duplicated for a seamless loop -->
-                        <h1>berg &nbsp;—&nbsp; Dennis&nbsp;</h1>
+                        <!-- Swapped the order to match the new reference image -->
+                        <h1>Geddam &nbsp;—&nbsp; David&nbsp;</h1>
+                        <h1>Geddam &nbsp;—&nbsp; David&nbsp;</h1>
                     </div>
                 </div>
             </div>

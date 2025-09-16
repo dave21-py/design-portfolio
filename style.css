@@ -20,8 +20,6 @@ body {
     font-family: var(--font-family);
     background-color: var(--background-color);
     color: var(--text-color);
-    overflow: hidden; /* Important: Keeps the page from actually scrolling */
-    height: 100vh;
     position: relative;
 }
 
@@ -231,42 +229,18 @@ body {
     padding: 0 2vw;
 }
 
-/* --- SCROLL ANIMATION STRUCTURE --- */
-.scroll-wrapper {
-    position: relative;
+.hero-section {
     height: 100vh;
-    overflow: hidden;
-}
-
-.hero-section,
-.content-section {
-    height: 100%;
     width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1);
-}
-
-.hero-section.scrolled {
-    transform: translateY(-100%);
+    position: relative; /* All child elements are positioned relative to this */
 }
 
 .content-section {
     background-color: #fff;
     color: #1a1a1a;
-    transform: translateY(100%);
+    position: relative; /* This section will scroll normally */
     padding: 60px;
-}
-
-.content-section.visible {
-    transform: translateY(0);
-}
-
-/* --- START: UPDATED CONTENT SECTION STYLES --- */
-.content-section {
-    align-items: flex-start;
-    padding-top: 15vh;
+    z-index: 20; /* Ensure it starts on top of the hero section */
 }
 
 .content-wrapper {
@@ -274,7 +248,7 @@ body {
     max-width: 1100px;
     margin: 0 auto;
     position: relative;
-    height: 100%;
+    padding-top: 15vh;
 }
 
 .content-layout {
@@ -282,6 +256,7 @@ body {
     justify-content: space-between;
     align-items: flex-start;
     gap: 60px;
+    padding-bottom: 25vh; /* More space before projects */
 }
 
 .about-text {
@@ -327,16 +302,43 @@ body {
     margin-right: 20px;
 }
 
-.recent-work {
-    position: absolute;
-    bottom: 15vh;
-    left: 0;
+.projects-header {
     font-size: 12px;
     font-weight: 500;
     color: #b0b0b0;
     letter-spacing: 0.1em;
+    padding-bottom: 40px;
 }
-/* --- END: UPDATED CONTENT SECTION STYLES --- */
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2vw;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.projects-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+}
+
+.project-card {
+    border-radius: 12px;
+    overflow: hidden;
+    width: 100%;
+    will-change: transform, opacity; /* Add this line */
+}
+
+.project-card img,
+.project-card video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
 
 /* --- FLUID NAVIGATION HOVER --- */
 .navigation {

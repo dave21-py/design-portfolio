@@ -423,6 +423,14 @@ body {
         transform: translate(-50%, -50%) scale(1);
     }
 }
+.projects-title {
+    font-family: var(--modern-font-stack);
+    font-size: 72px; /* Large and impactful like iOS headings */
+    font-weight: 600;
+    color: #1a1a1a;
+    padding-bottom: 60px; /* Space between title and grid */
+    letter-spacing: -0.02em; /* Subtle tightening of letter spacing */
+}
 
 /* --- RESPONSIVENESS --- */
 @media (max-width: 768px) {
@@ -445,6 +453,10 @@ body {
     }
     .hero-image-container {
         width: 60vw;
+    }
+    .projects-title {
+        font-size: 48px;
+        padding-bottom: 40px;
     }
 
     /* --- RESPONSIVE STYLES FOR NEW SECTION --- */

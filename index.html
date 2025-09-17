@@ -5,171 +5,223 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>David Geddam | Designer & Developer</title>
         <link rel="stylesheet" href="style.css" />
+        <!-- Switched to Manrope Font -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
             rel="stylesheet"
         />
     </head>
     <body>
-        <div class="page-glow"></div>
+        <!-- The custom cursor for the hover effect -->
+        <div class="view-cursor">View</div>
 
-        <header class="header">
-            <div class="logo">
-                <p>&copy; Code by David</p>
-            </div>
-            <nav class="navigation">
-                <ul>
-                    <li><a href="#">Projects</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <div class="nav-dot"></div>
-            </nav>
-        </header>
+        <!-- NEW: The element for the page transition wipe -->
+        <div class="transition-wipe"></div>
 
-        <main class="main-content hero-section">
-            <div class="location-widget">
-                <div class="location-text">
-                    <span>Located</span>
-                    <span>in the United States</span>
+        <!-- NEW: Wrapper for the entire home page content -->
+        <div id="home-page">
+            <div class="page-glow"></div>
+
+            <header class="header">
+                <div class="logo">
+                    <p>&copy; Code by David</p>
                 </div>
-                <div class="globe-icon-wrapper">
-                    <div class="globe-icon">
-                        <div class="globe">
-                            <div class="globe-line"></div>
-                            <div class="globe-line"></div>
-                            <div class="globe-line"></div>
-                            <div class="globe-line"></div>
-                            <div class="globe-line"></div>
-                            <div class="globe-line"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <nav class="navigation">
+                    <ul>
+                        <li><a href="#">Projects</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                    <div class="nav-dot"></div>
+                </nav>
+            </header>
 
-            <a href="#" class="role-link">
-                <div class="role-description">
-                    <div class="arrow-icon">
-                        <svg
-                            width="32"
-                            height="32"
-                            viewBox="0 0 16 16"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                d="M8.38477 2.27271L13.1121 7.00004L13.1121 8.99998L8.38477 13.7273L7.07107 12.4136L10.4847 8.99998H2.88794V7.00004H10.4847L7.07107 3.58634L8.38477 2.27271Z"
-                                fill="white"
-                            />
-                        </svg>
+            <main class="main-content hero-section">
+                <div class="location-widget">
+                    <div class="location-text">
+                        <span>Located</span>
+                        <span>in the United States</span>
                     </div>
-                    <p>Freelance</p>
-                    <p>CS Student and Developer</p>
-                </div>
-            </a>
-
-            <div class="hero-image-container">
-                <img
-                    src="images/new1.png"
-                    alt="Portrait of David Geddam"
-                    class="hero-image"
-                />
-            </div>
-
-            <div class="title-container">
-                <div class="marquee">
-                    <div class="marquee-content">
-                        <h1>Geddam &nbsp;—&nbsp; David&nbsp;</h1>
-                        <h1>Geddam &nbsp;—&nbsp; David&nbsp;</h1>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <!-- START: ABOUT & PROJECTS SECTION -->
-        <section class="content-section">
-            <div class="content-wrapper">
-                <div class="content-layout">
-                    <div class="about-text">
-                        <h2>
-                            Helping brands to stand out in the digital era.
-                            Together we will set the new status quo. No
-                            nonsense, always on the cutting edge.
-                        </h2>
-                    </div>
-                    <div class="about-details">
-                        <p class="about-paragraph">
-                            The combination of my passion for design, code &
-                            interaction positions me in a unique place in the
-                            web design world.
-                        </p>
-                        <div class="about-me-button">
-                            <span>About me</span>
+                    <div class="globe-icon-wrapper">
+                        <div class="globe-icon">
+                            <div class="globe">
+                                <div class="globe-line"></div>
+                                <div class="globe-line"></div>
+                                <div class="globe-line"></div>
+                                <div class="globe-line"></div>
+                                <div class="globe-line"></div>
+                                <div class="globe-line"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="projects-header"></div>
-                <h2 class="projects-title">Projects</h2>
-            </div>
+                <a href="#" class="role-link">
+                    <div class="role-description">
+                        <div class="arrow-icon">
+                            <svg
+                                width="32"
+                                height="32"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M8.38477 2.27271L13.1121 7.00004L13.1121 8.99998L8.38477 13.7273L7.07107 12.4136L10.4847 8.99998H2.88794V7.00004H10.4847L7.07107 3.58634L8.38477 2.27271Z"
+                                    fill="white"
+                                />
+                            </svg>
+                        </div>
+                        <p>Freelance</p>
+                        <p>CS Student and Developer</p>
+                    </div>
+                </a>
 
-            <div class="projects-grid">
-                <!-- Column 1 -->
-                <div class="projects-column">
-                    <div class="project-card">
-                        <img src="images/demo2.png" alt="Project One" />
-                    </div>
-                    <div class="project-card">
-                        <video
-                            src="images/tiling-bg.mp4"
-                            autoplay
-                            loop
-                            muted
-                            playsinline
-                        ></video>
-                    </div>
-                    <div class="project-card">
-                        <img src="images/ebp.png" alt="Project One" />
-                    </div>
-                    <div class="project-card">
-                        <img src="images/prompt.png" alt="Project One" />
-                    </div>
-                    <div class="project-card">
-                        <img src="images/demo1.png" alt="Project One" />
+                <div class="hero-image-container">
+                    <img
+                        src="images/new1.png"
+                        alt="Portrait of David Geddam"
+                        class="hero-image"
+                    />
+                </div>
+
+                <div class="title-container">
+                    <div class="marquee">
+                        <div class="marquee-content">
+                            <h1>Geddam &nbsp;—&nbsp; David&nbsp;</h1>
+                            <h1>Geddam &nbsp;—&nbsp; David&nbsp;</h1>
+                        </div>
                     </div>
                 </div>
-                <!-- Column 2 -->
-                <div class="projects-column">
-                    <div class="project-card">
-                        <img src="images/mcpmaps.png" alt="Project Three" />
+            </main>
+
+            <!-- START: ABOUT & PROJECTS SECTION -->
+            <section class="content-section">
+                <div class="content-wrapper">
+                    <div class="content-layout">
+                        <div class="about-text">
+                            <h2>
+                                Helping brands to stand out in the digital era.
+                                Together we will set the new status quo. No
+                                nonsense, always on the cutting edge.
+                            </h2>
+                        </div>
+                        <div class="about-details">
+                            <p class="about-paragraph">
+                                The combination of my passion for design, code &
+                                interaction positions me in a unique place in
+                                the web design world.
+                            </p>
+                            <div class="about-me-button">
+                                <span>About me</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="project-card">
-                        <img src="images/titlescreen.png" alt="Project Four" />
+
+                    <div class="projects-header"></div>
+                    <h2 class="projects-title">Projects</h2>
+                </div>
+
+                <div class="projects-grid">
+                    <!-- Column 1 -->
+                    <div class="projects-column">
+                        <!-- IMPORTANT: Replace '#' with your actual project links -->
+                        <a href="#" target="_blank" class="project-link">
+                            <div class="project-card">
+                                <img src="images/demo2.png" alt="Project" />
+                            </div>
+                        </a>
+                        <a href="#" target="_blank" class="project-link">
+                            <div class="project-card">
+                                <video
+                                    src="images/tiling-bg.mp4"
+                                    autoplay
+                                    loop
+                                    muted
+                                    playsinline
+                                ></video>
+                            </div>
+                        </a>
+                        <a href="#" target="_blank" class="project-link">
+                            <div class="project-card">
+                                <img src="images/ebp.png" alt="Project" />
+                            </div>
+                        </a>
+                        <a href="#" target="_blank" class="project-link">
+                            <div class="project-card">
+                                <img src="images/prompt.png" alt="Project" />
+                            </div>
+                        </a>
+                        <a href="#" target="_blank" class="project-link">
+                            <div class="project-card">
+                                <img src="images/demo1.png" alt="Project" />
+                            </div>
+                        </a>
                     </div>
-                    <div class="project-card">
-                        <video
-                            src="images/ai-portfolio (1).mp4"
-                            autoplay
-                            loop
-                            muted
-                            playsinline
-                        ></video>
+                    <!-- Column 2 -->
+                    <div class="projects-column">
+                        <a href="#" target="_blank" class="project-link">
+                            <div class="project-card">
+                                <img src="images/mcpmaps.png" alt="Project" />
+                            </div>
+                        </a>
+                        <a href="#" target="_blank" class="project-link">
+                            <div class="project-card">
+                                <img
+                                    src="images/titlescreen.png"
+                                    alt="Project"
+                                />
+                            </div>
+                        </a>
+                        <a href="#" target="_blank" class="project-link">
+                            <div class="project-card">
+                                <video
+                                    src="images/ai-portfolio (1).mp4"
+                                    autoplay
+                                    loop
+                                    muted
+                                    playsinline
+                                ></video>
+                            </div>
+                        </a>
+                        <a href="#" target="_blank" class="project-link">
+                            <div class="project-card">
+                                <img src="images/demonew.png" alt="Project" />
+                            </div>
+                        </a>
+                        <a href="#" target="_blank" class="project-link">
+                            <div class="project-card">
+                                <img
+                                    src="images/tictactoescreen.png"
+                                    alt="Project"
+                                />
+                            </div>
+                        </a>
                     </div>
-                    <div class="project-card">
-                        <img src="images/demonew.png" alt="Project One" />
-                    </div>
-                    <div class="project-card">
-                        <img
-                            src="images/tictactoescreen.png"
-                            alt="Project One"
-                        />
-                    </div>
+                </div>
+            </section>
+            <!-- END: ABOUT & PROJECTS SECTION -->
+        </div>
+        <!-- END: home-page wrapper -->
+
+        <!-- NEW: The entire 'About' page section -->
+        <section class="about-page" style="display: none">
+            <div class="about-page-content">
+                <nav class="about-nav">
+                    <p>&copy; Code by David</p>
+                    <a href="#" class="back-button">Back</a>
+                </nav>
+                <div class="about-main-text">
+                    <h2>
+                        I'm David, a developer and designer with a passion for
+                        creating beautiful, functional, and user-centered
+                        digital experiences.
+                    </h2>
                 </div>
             </div>
         </section>
-        <!-- END: ABOUT & PROJECTS SECTION -->
 
         <script src="https://cdn.jsdelivr.net/npm/lenis@1.0.45/dist/lenis.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>

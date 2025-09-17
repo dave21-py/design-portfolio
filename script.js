@@ -128,6 +128,53 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // --- FLUID FOOTER ANIMATIONS ---
+  const ctaButton = document.querySelector(".cta-button");
+  const footerSection = document.querySelector(".footer-section");
+
+  // Magnetic Button Effect for Footer CTA
+  if (footerSection && ctaButton) {
+    const strength = 100;
+    footerSection.addEventListener("mousemove", (e) => {
+      const rect = ctaButton.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+
+      gsap.to(ctaButton, {
+        x: (x / rect.width) * strength,
+        y: (y / rect.height) * strength,
+        duration: 1.2,
+        ease: "power3.out",
+      });
+    });
+    footerSection.addEventListener("mouseleave", () => {
+      gsap.to(ctaButton, {
+        x: 0,
+        y: 0,
+        duration: 1.2,
+        ease: "elastic.out(1, 0.3)",
+      });
+    });
+  }
+
+  // Live Local Time
+  const timeElement = document.querySelector("#local-time span:last-child");
+
+  function updateTime() {
+    if (timeElement) {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+      });
+      timeElement.textContent = timeString;
+    }
+  }
+  setInterval(updateTime, 1000);
+  updateTime(); // Initial call
+
   // --- REVISED AND OPTIMIZED PAGE TRANSITION LOGIC ---
   const aboutButton = document.querySelector(".about-me-button");
   const backButton = document.querySelector(".back-button");

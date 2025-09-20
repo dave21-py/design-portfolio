@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
   // --- SMOOTH SCROLL SETUP (LENIS) ---
   const lenis = new Lenis();
+  gsap.registerPlugin(ScrollTrigger);
+  lenis.on("scroll", ScrollTrigger.update);
+  gsap.ticker.add((time) => lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
 
   function raf(time) {
     lenis.raf(time);
@@ -8,45 +12,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   requestAnimationFrame(raf);
 
-  // --- INTEGRATE GSAP SCROLLTRIGGER WITH LENIS ---
-  gsap.registerPlugin(ScrollTrigger);
-
-  lenis.on("scroll", ScrollTrigger.update);
-
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-  });
-  gsap.ticker.lagSmoothing(0);
-
   // --- NAVIGATION DOT LOGIC ---
   const navLinks = document.querySelectorAll(".navigation ul li");
   const navDot = document.querySelector(".nav-dot");
   const navigation = document.querySelector(".navigation");
-  const pageGlow = document.querySelector(".page-glow");
 
-  if (navLinks.length && navDot && navigation && pageGlow) {
+  if (navLinks.length && navDot && navigation) {
     const handleMouseEnter = (event) => {
       const link = event.currentTarget;
       const linkCenter = link.offsetLeft + link.offsetWidth / 2;
       navDot.style.left = `${linkCenter}px`;
       navDot.style.opacity = "1";
-      pageGlow.classList.add("visible");
     };
-
-    const handleMouseLeave = () => {
-      navDot.style.opacity = "0";
-      pageGlow.classList.remove("visible");
-    };
-
-    navLinks.forEach((link) => {
-      link.addEventListener("mouseenter", handleMouseEnter);
-    });
+    const handleMouseLeave = () => (navDot.style.opacity = "0");
+    navLinks.forEach((link) =>
+      link.addEventListener("mouseenter", handleMouseEnter),
+    );
     navigation.addEventListener("mouseleave", handleMouseLeave);
   }
 
-  // --- PROJECT CARD SCROLL ANIMATION ---
+  // --- PROJECT ANIMATIONS & CURSOR ---
   const projectCards = document.querySelectorAll(".project-card");
-
   projectCards.forEach((card) => {
     gsap.fromTo(
       card,
@@ -67,12 +53,11 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   });
 
-  // --- COLUMN PARALLAX EFFECT ---
   const columns = document.querySelectorAll(".projects-column");
   columns.forEach((column, index) => {
     const yPercent = index % 2 === 0 ? -15 : 5;
     gsap.to(column, {
-      yPercent: yPercent,
+      yPercent,
       ease: "none",
       scrollTrigger: {
         trigger: ".projects-grid",
@@ -83,168 +68,166 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // --- PROJECT GRID FOCUS EFFECT ---
   const projectsGrid = document.querySelector(".projects-grid");
-
   if (projectsGrid) {
-    projectsGrid.addEventListener("mouseenter", () => {
-      projectsGrid.classList.add("is-hovered");
-    });
-    projectsGrid.addEventListener("mouseleave", () => {
-      projectsGrid.classList.remove("is-hovered");
-    });
+    projectsGrid.addEventListener("mouseenter", () =>
+      projectsGrid.classList.add("is-hovered"),
+    );
+    projectsGrid.addEventListener("mouseleave", () =>
+      projectsGrid.classList.remove("is-hovered"),
+    );
   }
 
-  // --- CUSTOM 'VIEW' CURSOR LOGIC ---
   const cursor = document.querySelector(".view-cursor");
   const hoverTriggerElements = document.querySelectorAll(
-    ".project-link, .about-me-button",
+    ".project-link, .about-me-button, .about-cta-button, .cta-button",
   );
-
   const xTo = gsap.quickTo(cursor, "x", { duration: 0.6, ease: "power3" });
   const yTo = gsap.quickTo(cursor, "y", { duration: 0.6, ease: "power3" });
-
   window.addEventListener("mousemove", (e) => {
     xTo(e.clientX);
     yTo(e.clientY);
   });
-
   hoverTriggerElements.forEach((el) => {
-    el.addEventListener("mouseenter", () => {
+    el.addEventListener("mouseenter", () =>
       gsap.to(cursor, {
         scale: 1,
         opacity: 1,
         duration: 0.4,
         ease: "power3.out",
-      });
-    });
-    el.addEventListener("mouseleave", () => {
+      }),
+    );
+    el.addEventListener("mouseleave", () =>
       gsap.to(cursor, {
         scale: 0,
         opacity: 0,
         duration: 0.4,
         ease: "power3.in",
-      });
-    });
+      }),
+    );
   });
 
-  // --- FLUID FOOTER ANIMATIONS ---
-  const ctaButton = document.querySelector(".cta-button");
-  const footerSection = document.querySelector(".footer-section");
-
-  // Magnetic Button Effect for Footer CTA
-  if (footerSection && ctaButton) {
-    const strength = 100;
-    footerSection.addEventListener("mousemove", (e) => {
-      const rect = ctaButton.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-
-      gsap.to(ctaButton, {
-        x: (x / rect.width) * strength,
-        y: (y / rect.height) * strength,
-        duration: 1.2,
-        ease: "power3.out",
-      });
-    });
-    footerSection.addEventListener("mouseleave", () => {
-      gsap.to(ctaButton, {
-        x: 0,
-        y: 0,
-        duration: 1.2,
-        ease: "elastic.out(1, 0.3)",
-      });
-    });
-  }
-
-  // Live Local Time
+  // --- LIVE LOCAL TIME ---
   const timeElement = document.querySelector("#local-time span:last-child");
-
   function updateTime() {
     if (timeElement) {
       const now = new Date();
-      const timeString = now.toLocaleTimeString([], {
+      timeElement.textContent = now.toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
         second: "2-digit",
         hour12: true,
       });
-      timeElement.textContent = timeString;
     }
   }
   setInterval(updateTime, 1000);
-  updateTime(); // Initial call
+  updateTime();
 
-  // --- REVISED AND OPTIMIZED PAGE TRANSITION LOGIC ---
+  // --- NEW & IMPROVED PAGE TRANSITION LOGIC ---
   const aboutButton = document.querySelector(".about-me-button");
   const backButton = document.querySelector(".back-button");
   const transitionWipe = document.querySelector(".transition-wipe");
   const homePage = document.querySelector("#home-page");
   const aboutPage = document.querySelector(".about-page");
-  const aboutText = document.querySelector(".about-main-text h2");
-
-  // Variables to store the state before transitioning
-  let savedScrollPosition = 0;
-  let buttonRect = null;
 
   if (aboutButton && backButton && transitionWipe && homePage && aboutPage) {
-    // --- Go to the About Page ---
+    let savedScrollPosition = 0;
+    let buttonRect = null;
+
     aboutButton.addEventListener("click", (e) => {
       e.preventDefault();
-
-      // Save the button's position and current scroll position
       savedScrollPosition = window.scrollY;
       buttonRect = aboutButton.getBoundingClientRect();
 
-      const timeline = gsap.timeline();
-      timeline
-        .set(transitionWipe, {
-          transformOrigin: `${buttonRect.left + buttonRect.width / 2}px ${buttonRect.top + buttonRect.height / 2}px`,
-        })
+      const pageContentToAnimate = [
+        ".about-header",
+        ".about-hero-text h1",
+        ".about-hero-globe",
+        ".about-intro",
+        ".about-services",
+        ".about-footer",
+      ];
+
+      gsap.set(pageContentToAnimate, { opacity: 0, y: 30 });
+
+      const tl = gsap.timeline({
+        onStart: () => lenis.stop(), // Stop scroll during transition
+      });
+
+      tl.set(transitionWipe, {
+        transformOrigin: `${buttonRect.left + buttonRect.width / 2}px ${buttonRect.top + buttonRect.height / 2}px`,
+        backgroundColor: "#1a1a1a", // Start color black
+      })
         .to(transitionWipe, {
           scale: 30,
-          duration: 0.8, // Faster animation
+          duration: 0.6,
           ease: "power3.inOut",
         })
-        .set(homePage, { display: "none" }, ">-0.4") // Overlap animations more
-        .set(aboutPage, { display: "block" }, "<")
-        .from(aboutText, {
-          y: 40,
-          opacity: 0,
-          duration: 0.6,
-          ease: "power2.out",
+        .to(
+          transitionWipe,
+          {
+            backgroundColor: "#4f46e5", // Animate to blue
+            duration: 0.4,
+            ease: "none",
+          },
+          "-=0.5",
+        )
+        .set(homePage, { display: "none" })
+        .set(aboutPage, { display: "block" })
+        .to(transitionWipe, {
+          // Simulate the black screen from the video before revealing content
+          backgroundColor: "#000000",
+          duration: 0.2,
         })
         .to(transitionWipe, {
-          scale: 0,
-          duration: 0.7, // Faster animation
-          ease: "power3.out",
-        });
+          opacity: 0,
+          duration: 0.5,
+          ease: "power2.out",
+          onComplete: () => {
+            lenis.start(); // Re-enable scroll
+            lenis.scrollTo(0, { immediate: true }); // Scroll to top of new page
+          },
+        })
+        .to(
+          pageContentToAnimate,
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.1,
+            duration: 0.8,
+            ease: "power3.out",
+          },
+          "-=0.6",
+        );
     });
 
-    // --- Go back to the Home Page ---
     backButton.addEventListener("click", (e) => {
       e.preventDefault();
+      const tl = gsap.timeline({
+        onStart: () => lenis.stop(),
+      });
 
-      const timeline = gsap.timeline();
-      timeline
-        .set(transitionWipe, {
-          // Use the SAVED button position for the return animation
-          transformOrigin: `${buttonRect.left + buttonRect.width / 2}px ${buttonRect.top + buttonRect.height / 2}px`,
-        })
+      tl.set(transitionWipe, {
+        transformOrigin: `50% 50%`, // Center of screen
+        opacity: 1,
+        scale: 0,
+        backgroundColor: "#4f46e5",
+      })
         .to(transitionWipe, {
           scale: 30,
-          duration: 0.8, // Faster animation
+          duration: 0.6,
           ease: "power3.inOut",
         })
-        .set(aboutPage, { display: "none" }, ">-0.4") // Overlap animations more
-        .set(homePage, { display: "block" }, "<")
+        .set(aboutPage, { display: "none" })
+        .set(homePage, { display: "block" })
         .call(() => {
-          // Instantly scroll back to the saved position
+          lenis.start();
           lenis.scrollTo(savedScrollPosition, { immediate: true });
         })
         .to(transitionWipe, {
+          transformOrigin: `${buttonRect.left + buttonRect.width / 2}px ${buttonRect.top + buttonRect.height / 2}px`,
           scale: 0,
-          duration: 0.7, // Faster animation
+          duration: 0.7,
           ease: "power3.out",
         });
     });

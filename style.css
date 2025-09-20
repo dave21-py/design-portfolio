@@ -5,12 +5,28 @@
     --globe-background: #3c3c3c;
     --glow-color: #00c2cb;
     --main-font: "Manrope", sans-serif;
+    --about-blue: #4f46e5;
+    --about-bg: #f3f3f3;
+    --about-text: #1a1a1a;
+    --about-footer-bg: #111111;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html.lenis {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden !important;
 }
 
 body {
@@ -294,6 +310,8 @@ body {
     cursor: none;
     align-self: flex-end;
     margin-right: 20px;
+    position: relative;
+    z-index: 5;
 }
 
 .projects-header {
@@ -332,21 +350,18 @@ body {
     overflow: hidden;
     width: 100%;
     will-change: transform, opacity;
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); /* Add this for smooth scaling */
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .project-link:hover .project-card {
-    transform: scale(1.02); /* Gently scales the card on hover */
+    transform: scale(1.02);
 }
-/* --- NEW: Project Grid Focus Effect --- */
 
-/* When the grid is being hovered, fade out all project links */
 .projects-grid.is-hovered .project-link {
     opacity: 0.5;
     filter: blur(2px);
 }
 
-/* On top of the previous rule, bring the SPECIFIC hovered link back to full focus */
 .projects-grid.is-hovered .project-link:hover {
     opacity: 1;
     filter: blur(0);
@@ -359,7 +374,6 @@ body {
     display: block;
     object-fit: cover;
 }
-/* --- Custom 'View' Cursor --- */
 .view-cursor {
     position: fixed;
     top: 0;
@@ -375,24 +389,21 @@ body {
     font-size: 18px;
     font-weight: 500;
     z-index: 9999;
-    pointer-events: none; /* Allows clicks to pass through */
+    pointer-events: none;
     opacity: 0;
     transform: translate(-50%, -50%) scale(0);
     will-change: transform, opacity;
 }
-
-/* --- Project Link Styling --- */
 .project-link {
-    display: block; /* Makes the whole area of the link clickable */
+    display: block;
     text-decoration: none;
-    cursor: none; /* Hides the default cursor on hover */
+    cursor: none;
     transition:
         opacity 0.4s ease,
         transform 0.4s ease,
         filter 0.4s ease;
 }
 
-/* --- FLUID NAVIGATION HOVER --- */
 .navigation {
     position: relative;
 }
@@ -412,7 +423,6 @@ body {
     pointer-events: none;
 }
 
-/* --- PAGE GLOW --- */
 .page-glow {
     position: fixed;
     top: 0;
@@ -429,18 +439,21 @@ body {
     opacity: 0.6;
 }
 
-/* --- NEW: Page Transition Wipe --- */
+/* --- Page Transition Wipe --- */
 .transition-wipe {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: #000000; /* Color of the wipe */
+    background-color: var(--widget-background);
     transform: scale(0);
     border-radius: 50%;
     z-index: 10000;
     pointer-events: none;
+}
+.transition-wipe.is-active {
+    transform: scale(1);
 }
 
 /* --- NEW: About Page Styling --- */
@@ -450,51 +463,224 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #000000;
-    color: #ffffff;
+    background-color: var(--about-bg);
+    color: var(--about-text);
     z-index: 9998;
-    padding: 40px 60px;
+    overflow-y: auto; /* Allow scrolling within the about page */
 }
 
-.about-page-content {
+.about-header {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.about-nav {
+    padding: 40px 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    padding-bottom: 40px;
+    z-index: 100;
 }
-
-.back-button {
-    color: #ffffff;
-    text-decoration: none;
+.about-logo a {
     font-size: 16px;
     font-weight: 500;
+    color: var(--about-text);
+    text-decoration: none;
 }
 
-.about-main-text {
-    flex-grow: 1;
+.about-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+}
+.about-nav a {
+    text-decoration: none;
+    color: var(--about-text);
+    font-size: 16px;
+    font-weight: 500;
+    position: relative;
+}
+.about-nav li.active a::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 5px;
+    background-color: var(--about-text);
+    border-radius: 50%;
+}
+
+.about-content {
+    padding: 15vh 60px 0;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.about-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10vh 0;
+    border-bottom: 1px solid #ddd;
+}
+.about-hero-text h1 {
+    font-size: 5.5vw;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.about-hero-globe {
+    width: 180px;
+    height: 180px;
+    background-color: var(--about-blue);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.about-hero-globe svg {
+    width: 80px;
+    height: 80px;
+}
+
+.about-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    padding: 15vh 0;
+}
+.about-intro-text p {
+    font-size: 24px;
+    line-height: 1.6;
+    max-width: 450px;
+    margin-bottom: 30px;
+}
+.about-intro-text span {
+    font-style: italic;
+    color: #888;
+}
+.about-intro-image {
+    border-radius: 12px;
+    overflow: hidden;
+}
+.about-intro-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.about-services {
+    padding-bottom: 20vh;
+}
+.about-services h2 {
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 60px;
+}
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    border-top: 1px solid #ddd;
+    padding-top: 60px;
+}
+.service-card {
+    padding-right: 20px;
+}
+.service-card span {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 30px;
+    display: block;
+}
+.service-card h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.service-card p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #555;
+}
+
+/* --- About Page Footer --- */
+.about-footer {
+    background-color: var(--about-footer-bg);
+    color: #fff;
+    padding: 15vh 60px 60px;
+}
+.about-footer-content {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+.about-footer-content h2 {
+    font-size: 7vw;
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 60px;
+}
+.about-footer-pic {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 30px;
+}
+.about-footer-cta-line {
+    position: relative;
+    width: 100%;
     display: flex;
     align-items: center;
+    margin-bottom: 60px;
+}
+.about-footer-cta-line .line {
+    width: 100%;
+    height: 1px;
+    background-color: #444;
+}
+.about-cta-button {
+    position: absolute;
+    right: 15%;
+    width: 180px;
+    height: 180px;
+    background-color: var(--about-blue);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
     justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: none;
+    transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.about-footer-links {
+    display: flex;
+    gap: 30px;
+    padding-top: 30px;
+}
+.about-footer-links a {
+    display: inline-block;
+    padding: 12px 24px;
+    border: 1px solid #444;
+    border-radius: 30px;
+    color: #fff;
+    text-decoration: none;
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+.about-footer-links a:hover {
+    background-color: #fff;
+    color: #000;
 }
 
-.about-main-text h2 {
-    font-size: 44px;
-    font-weight: 500;
-    line-height: 1.4;
-    max-width: 800px;
-    text-align: left;
-}
-/* --- FLUID FOOTER STYLING --- */
+/* --- FOOTER STYLING --- */
 .footer-section {
     position: relative;
     background-color: #000;
@@ -505,17 +691,14 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    transform: translateY(
-        -99%
-    ); /* Pull the SVG up to sit on top of the footer */
-    line-height: 0; /* Removes any extra space */
+    transform: translateY(-99%);
+    line-height: 0;
 }
 .footer-curve svg {
     display: block;
     width: 100%;
     height: auto;
 }
-
 .footer-content {
     position: relative;
     padding: 20vh 60px 40px 60px;
@@ -524,14 +707,12 @@ body {
     justify-content: space-between;
     min-height: 100vh;
 }
-
 .footer-main {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-
 .footer-title {
     display: flex;
     align-items: center;
@@ -549,7 +730,6 @@ body {
     font-weight: 600;
     line-height: 1.1;
 }
-
 .footer-cta-line {
     position: relative;
     width: 100%;
@@ -567,7 +747,7 @@ body {
     right: 15%;
     width: 180px;
     height: 180px;
-    background-color: #4f46e5; /* A nice blue color */
+    background-color: var(--about-blue);
     color: #fff;
     border-radius: 50%;
     display: flex;
@@ -579,7 +759,6 @@ body {
     cursor: none;
     transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
 }
-
 .contact-links {
     display: flex;
     gap: 30px;
@@ -599,7 +778,6 @@ body {
     background-color: #fff;
     color: #000;
 }
-
 .footer-sub {
     display: flex;
     justify-content: space-between;
@@ -670,10 +848,12 @@ body {
 
 /* --- RESPONSIVENESS --- */
 @media (max-width: 768px) {
-    .header {
+    .header,
+    .about-header {
         padding: 30px;
     }
-    .navigation ul {
+    .navigation ul,
+    .about-nav {
         display: none;
     }
     .location-widget {
@@ -684,8 +864,11 @@ body {
         right: 5vw;
         transform: translateY(-50%) translateX(110%) scale(0.8);
     }
-    .marquee h1 {
-        font-size: 22vw;
+    .marquee h1,
+    .about-hero-text h1,
+    .about-footer-content h2,
+    .footer-title h2 {
+        font-size: 12vw;
     }
     .hero-image-container {
         width: 60vw;
@@ -714,5 +897,28 @@ body {
         width: 100%;
         text-align: center;
         left: 0;
+    }
+
+    .about-hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+    .about-hero-globe {
+        width: 120px;
+        height: 120px;
+    }
+    .about-intro {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .about-intro-text p {
+        font-size: 18px;
+    }
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    .projects-grid {
+        grid-template-columns: 1fr;
     }
 }
